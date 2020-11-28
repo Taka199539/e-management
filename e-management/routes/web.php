@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
+    Route::get('attendance/index', 'User\AttendanceController@add');
+    Route::get('attendance/index', 'User\AttendanceController@index');
+    Route::get('attendance/edit', 'User\AttendanceController@edit');
+    Route::get('attendace/edit', 'User\AttendanceController@resister');
+    Route::get('attendance/delete', 'User\AttendanceController@delete');
+});
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
