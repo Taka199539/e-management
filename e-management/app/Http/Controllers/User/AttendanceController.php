@@ -24,16 +24,21 @@ class AttendanceController extends Controller
         return view('user/attendance/edit');
     }
     
-    public function resiter()
+    public function update()
     {
+        
         return redirect('user/attendance/index');
     }
     
     public function delete()
     {
+        
         return redirect('user/attendance/index');
     }
 }
+
+
+
 
 
 

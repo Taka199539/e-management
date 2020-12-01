@@ -17,12 +17,12 @@
                            <div class="form-group row">
                          <form>
                             <label for="start_time">開始時間</label>
-                            <input type="time" min="00:00" max="23:59" name="start_time" id="start_time">
+                            <input type="time" min="00:00" max="23:59" name="start_time" id="puchin_time">
                          </form>
                     <div class="form-group row">
                          <form>
                             <label for="end_time">終了時間</label>
-                            <input type="time" min="00:00" max="23:59" name="end_time" id="end_time">
+                            <input type="time" min="00:00" max="23:59" name="end_time" id="puchout_time">
                          </form>
                     <div class="form-group row">
                          <form>

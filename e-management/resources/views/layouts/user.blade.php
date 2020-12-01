@@ -19,7 +19,8 @@
         rel="stylesheet" type="text_css">
         
         <!-- Styles -->
-        <link href="{{ asset('css.app.js') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/user.css') }}" rel="stylesheet">
     </head>
     <body>
         
@@ -27,12 +28,13 @@
             <nav class="navbar navbar-expand-md navbar-dark navbar-e-management">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}"> 
-                    {{ config('app.name','e-management')}} 
+                    {{ config('app.name','laravel')}} 
                     </a>
                     <button class="navbar-toggler" type="button" 
                     data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
+                        
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     
@@ -86,6 +88,8 @@
         </div>
     </body>
 </html>
+
+
 
 
 
