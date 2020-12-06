@@ -1,8 +1,8 @@
-extends('layouts.admin')
+@extends('layouts.app_admin')
 @section('title', 'ユーザー情報')
 
 @section('content')
-           <div class="container">
+        <div class="container">
              <div class="row">
                  <h2>ユーザー情報</h2>
              </div>
@@ -12,22 +12,20 @@ extends('layouts.admin')
                     <table class="table table-dark">
                         <thead>
                            <tr>
-                           <th width="10%">ID</th>
-                           <th width="20%">名前</th>
-                           <th width="50%">開始時間</th>
-                           <th width="10%">終了時間</th>
-                           <th width="10%">休憩時間</th>
-                           <th width="20%">月の労働時間</th>
-                           <th width="50%">通常時給</th>
-                           <th width="10%">深夜時給</th>
-                           <th width="50%">月給</th>
-                           <th width="10%">勤務形態</th>
+                           <th>ID</th>
+                           <th>ユーザーID</th>
+                           <th>名前</th>
+                           <th>開始時間</th>
+                           <th>終了時間</th>
+                           <th>休憩時間</th>
+                           <th>月の労働時間</th>
+                           <th>勤務形態</th>
+                           <th><a href="{{ action('Admin\ManagementController@delete') }}">削除</a></th>
                            </tr>
                         </thead>
-                <div class="col-md-4">
-                   <a href="{{ action('Admin\ManagementController@delete') }}" 
-                   roll="button" class="btn btn-primary">削除</a>
-                </div>
+                {{ csrf_field() }}
             </div>
         </div>
+    </div>
 @endsection
+

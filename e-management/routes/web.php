@@ -12,25 +12,31 @@
 */
 
 //user認証不要
-Route::get('/', function () {
-    return view('/home');
+Route::get('/', function () {return view('/welcome');});
+
+//attendace用ルート
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
+    Route::get('attendance/index', 'User\AttendanceController@index');
+    Route::get('attendance/create', 'User\AttendanceController@add');
+    Route::post('attendance/create', 'User\AttendanceController@create');
+    Route::get('attendance/edit', 'User\AttendanceController@edit');
+    Route::post('attendance/edit', 'User\AttendanceController@update');
+    Route::get('attendance/delete', 'User\AttendanceController@delete');
 });
 
-//attendaceコントローラー
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
-    Route::get('attendance/index', 'User\AttendanceController@add');
-    Route::get('attendance/index', 'User\AttendanceController@index');
-    Route::get('attendance/edit', 'User\AttendanceController@edit');
-    Route::get('attendace/edit', 'User\AttendanceController@update');
-    Route::get('attendance/delete', 'User\AttendanceController@delete');
+//出退勤
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+    Route::post('/punchin', 'HistoryController@punchIn')->name('history/punchin');
+    Route::post('/punchout', 'HistoryController@punchOut')->name('history/punchout');
 });
 
 
 Auth::routes();
 
 //user認証後
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::group(['middleware' => 'auth:user'], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
 //admin認証不要
 Route::group(['prefix' => 'admin'], function() {
@@ -44,4 +50,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
     Route::get('home', 'Admin\HomeController@index')->name('admin.home');
 });
+
+
+//management用ルート
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
+    Route::get('management.dashboard', 'Admin\ManagementController@add');
+    Route::get('management/dashboard', 'Admin\ManagementController@dashboard');
+    Route::get('management/information','Admin\ManagementController@information');
+    Route::get('management/delete', 'Admin\ManagementController@delete');
+    Route::get('management/resister', 'Admin\ManagementController@resister');
+    Route::post('management/resister', 'Admin\ManagementController@update');
+});
+
+
+
 

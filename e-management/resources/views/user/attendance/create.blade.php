@@ -1,11 +1,11 @@
 @extends('layouts.user')
-@section('title', '勤務情報の編集')
+@section('title', '勤務記録作成')
 
 @section('content')
        <div class="container">
             <div class="row">
-              <h2>勤務情報の編集</h2>
-               <form action="{{ action('User\AttendanceController@update') }}"
+              <h2>勤務情報作成</h2>
+               <form action="{{ action('User\AttendanceController@create') }}"
                  method="post" enctype="multipart/form-data">
                 <div class="col-md-8 mx-auto">
                     <div class="form-group row">
@@ -17,7 +17,7 @@
                     <div class="form-group row">
                              <label class="col-md-12" for="break_time">休憩時間</label>
                         <div class="col-md-10">
-                             <input type="time" min="00:00" max="03:59" name="break_time" id="break_time" value="{{ $attendance->break_time }}">
+                             <input type="time" min="00:00" max="03:59" name="break_time" id="break_time">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -38,7 +38,7 @@
                    <div class="col-md-10">
                    {{ csrf_field() }}
                   <input type="submit"role="button"
-                  class="btn btn-primary" value="更新">
+                  class="btn btn-primary" value="作成">
                   </form>
                 </div>
               </div>
@@ -46,17 +46,4 @@
          </div>
       </div>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
 
