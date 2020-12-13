@@ -28,7 +28,7 @@
                     </div>
                     
                     <div class="form-group row">
-                            <label class="col-md-10" for="body">日報</label>
+                            <label class="col-md-10" for="diary">日報</label>
                             
                     <div class="col-md-10">
                             <textarea class="form" name="diary" id="diary" rows="20">{{ old('diary') }}</textarea>

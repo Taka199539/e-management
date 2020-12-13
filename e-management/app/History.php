@@ -8,7 +8,10 @@ class History extends Model
 
 {
     
-    protected $fillable = ['user_id', 'punchIn', 'punchOut'];
+    protected $fillable = ['user_id' => 'required',
+                           'attendance_id' => 'required', 
+                           'attendance_start' => 'required',
+                           'attendance_end' => 'required'];
 
     /**
      * attendance関連付け
@@ -18,5 +21,14 @@ class History extends Model
     {
         $this->belongsTo(Attendance::class);
     }
+    
+     /**
+     * User関連付け
+     * 1対1
+     */
+     public function user()
+     {
+         $this->belongsTo('App\User');
+     }
     
 }

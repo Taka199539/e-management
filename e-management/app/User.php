@@ -37,8 +37,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+     /**
+     * Attendance関連付け
+     * 1対多
+     */
     public function attendance()
     {
         return $this->hasMany('App\Attendance');
+    }
+    
+    /**
+     * History関連付け
+     * 1対多
+     */
+    public function history()
+    {
+        return $this->hasMany('App\History');
     }
 }

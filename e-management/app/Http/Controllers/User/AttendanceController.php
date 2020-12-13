@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Attendance;
+use App\History;
+use App\Profile;
 
 class AttendanceController extends Controller
 {
@@ -23,6 +25,7 @@ class AttendanceController extends Controller
         $attendance = new Attendance();
         $form = $request->all();
         
+        
         $attendance->user_id = $request->user()->id;
         
         //フォームから送信されてきた_tokenを削除
@@ -38,11 +41,13 @@ class AttendanceController extends Controller
      //勤務表の表示
     public function index(Request $request)
     {
+        $profile = Profile::all();
         
         $attendances = Attendance::all();
-    
         
-        return view('user.attendance.index', ['attendances' => $attendances]);
+        $histories = History::all();
+        
+        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories]);
     }
     
     //ユーザーの勤務情報編集
@@ -53,16 +58,18 @@ class AttendanceController extends Controller
         
         
         
-        return view('user/attendance/edit',['attendance' => $attendance]);
+        return view('user/attendance/edit',['attendance_form' => $attendance]);
     }
     
     public function update(Request $request)
     {
         
-        $this->validate($request, Attendance::$rules);
+        $attendance = Attendance::find($request->id);
         
+        //送信されてきたフォームデータを格納
         $attendance_form = $request->all();
         
+        //データを上書きして保存
         $attendance->fill($attendance_form)->save();
         
         return redirect('user/attendance/index');
