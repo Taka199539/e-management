@@ -54,4 +54,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\History');
     }
+    
+    /**
+     * History関連付け
+     * 1対1
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
 }

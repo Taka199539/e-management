@@ -41,13 +41,13 @@ class AttendanceController extends Controller
      //勤務表の表示
     public function index(Request $request)
     {
-        $profile = Profile::all();
+        $profiles = Profile::all();
         
         $attendances = Attendance::all();
         
         $histories = History::all();
         
-        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories]);
+        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories, 'profiles' => $profiles]);
     }
     
     //ユーザーの勤務情報編集
@@ -77,7 +77,6 @@ class AttendanceController extends Controller
     
     public function delete()
     {
-        
         return redirect('user/attendance/index');
     }
 }

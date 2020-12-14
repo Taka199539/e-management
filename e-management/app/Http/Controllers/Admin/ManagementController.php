@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Attendance;
 use App\History;
 use App\Profile;
+use App\User;
 
 class ManagementController extends Controller
 {
@@ -32,6 +33,7 @@ class ManagementController extends Controller
         
         $profile->user_id = $request->user()->id;
         
+        
         //入力情報を保存
         $profile->fill($form);
         $profile->save();
@@ -43,14 +45,21 @@ class ManagementController extends Controller
     public function information(Request $request)
     {
         
-        $profiles = Profile::All();
+        $profiles = User::All();
         
         return view('admin.management.information', ['profiles' => $profiles]);
     }
     
     //ユーザー情報の削除
-    public function delete()
+    public function delete(Request $request)
     {
+        //該当するProfileモデルを検索
+        $user = User::find($request->id);
+        $profile = Profile::find($request->id);
+        //削除
+        $user->delete();
+        $profile->delete();
+        
         return redirect('admin/management/dashboard');
     }
 

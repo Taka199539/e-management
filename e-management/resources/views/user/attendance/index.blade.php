@@ -9,11 +9,15 @@
                <div class="row">
                      <div class="col-md-4 mx-auto">
                        <ul class="list-item">
-                           <li class="user_name">ユーザー名</li>
-                           <li class="start_time">開始時間</li>
-                           <li class="end_time">終了時間</li>
-                           <li class="break_time">休憩時間</li>
-                           <li class="status">勤務形態</li>
+                           @foreach($profiles as $profile)
+                           @if($profile->profile)
+                           <li>{{ $profile->name }} </li>
+                           <li>{{ $profile->start_time }}</li>
+                           <li>{{ $profile->end_time}} </li>
+                           <li>{{ $profile->break_time}} </li>
+                           <li>{{ $profile->status }} </li>
+                           @endif
+                           @endforeach
                        </ul>
                     </div>
                     <div class="row">

@@ -12,6 +12,7 @@
                     <table class="table table-dark">
                         <thead>
                            <tr>
+                           <th>ユーザーID {{ Auth::id() }}</th>
                            <th>名前</th>
                            <th>開始時間</th>
                            <th>終了時間</th>
@@ -23,12 +24,20 @@
                 <tbody>
                     @foreach($profiles as $profile)
                         <tr>
-                            <td>{{ $profile->user_name }}</td>
+                            <td>{{ $profile->id }}</td>
+                            <td>{{ $profile->name }}</td>
+                            @if($profile->profile) 
                             <td>{{ $profile->start_time }}</td>
                             <td>{{ $profile->end_time }}</td>
                             <td>{{ $profile->break_time }}</td>
                             <td>{{ $profile->status }}</td>
-                            <td><a href="{{ action('Admin\ManagementController@delete', ['profile' => $profile->id])}}"></a></a></td>
+                             @else
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             @endif
+                            <td><a href="{{ action('Admin\ManagementController@delete', ['id' => $profile->id]) }}">削除</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -38,4 +47,6 @@
         </div>
     </div>
 @endsection
+
+
 

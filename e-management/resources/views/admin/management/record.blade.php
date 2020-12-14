@@ -9,7 +9,7 @@
               <div class="row">
                     <div class="list-work_histories col-md-8 mx-auto">
                           <div class="row">
-                          <table class="table table-light">
+                          <table class="table table-dark">
                             <thead>
                                 <tbody>
                             <tr> 
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="list-work_information col-md-12 mx-auto">
                           <div class="row">
-                          <table class="table table-light">
+                          <table class="table table-dark">
                             <thead>
                                  <th></th>
                                  <th>日付</th>

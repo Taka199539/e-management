@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Attendance;
 use App\History;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
@@ -15,46 +16,29 @@ class HistoryController extends Controller
     {
         $attendance = new Attendance;
         
-        $attendance->user_id = $request->user()->id;
+        $attendance->id = Auth::id();
         
-        $history = History::create([
-            'user_id' => $attendance->user_id,
-            'attendance_id' => $attendance->attendance_id,
-            'attendance_start' => Carbon::now(),]);
-        $histories = $attendance->history();
         
-        $newHistoryDay = Carbon::today();
-        
-        //打刻は1日1回まで
-        $oldHistory = History::Where('attendance_id', $attendance->user_id)->latest()->first();
-        if(oldHistory) {
-            $oldHistoryAttendance_start = new Carbon($oldHistory->attendance_start);
-            $oldHistoryDay = $oldHistroyDay->startOfDay();
-        }
-        
-        //直前に退勤打刻がされていない場合の処理
-        if(($oldHistoryDay == $newOldHistoryDay) && (empty($oldHistory->attendance_end))) {
-            return redirect()->back->with('既に打刻されています。');
-        }
+        $history = new History; 
+        $history->user_id = Auth::id();
+        $history->attendance_start = Carbon::now();
+         
+        $history->save();
         
         return redirect('user/attendance/index');
     }
     
-    public function attedance_end(Request $request)
+    public function attendance_end(Request $request)
     {
     
-        $attendance->user_id = $request->user()->id;
+        $attendance = new Attendance;
         
-        $history = History::where('attendance_id', $attendance->user_id)->latest()->latest();
-            
-        if(!empty($history->attendance_end)) {
-            return redirect()->back()->with('既に打刻されています。');
-        }
-         $history->update([
-            'user_id' => $attendance->user_id,
-            'attendance_id' => $attendance->attendance_id,
-            'attendance_end' => Carbon::now()
-        ]);
+        $attendance->id = Auth::id();
+        
+        $history = History::where('user_id', Auth::id());
+        
+        $history->update([
+            'attendance_end' => Carbon::now()]);
         
         return redirect('user/attendance/index');
         

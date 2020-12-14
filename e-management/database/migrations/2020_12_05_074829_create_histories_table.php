@@ -16,7 +16,6 @@ class CreateHistoriesTable extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('attendance_id');
             $table->dateTime('attendance_start');
             $table->dateTime('attendance_end')->nullable();
             $table->timestamps();

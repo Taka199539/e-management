@@ -39,9 +39,9 @@
                     </div>
                      
                    <div class="form-group row">
-                     <input type="radio" name="status" value="employee">正社員
-                     <input type="radio" name="status" value="parttime employee">アルバイト
-                     <input type="radio" name="status" value="contract employee">契約社員
+                     <input type="radio" name="status" value="正社員">正社員
+                     <input type="radio" name="status" value="アルバイト">アルバイト
+                     <input type="radio" name="status" value="契約社員">契約社員
                 </div>
                 
                 <div class="form-group row">

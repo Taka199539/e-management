@@ -11,11 +11,19 @@
 |
 */
 
+Auth::routes();
+
 //user認証不要
 Route::get('/', function () {return view('/welcome');});
 
+
+//user認証後
+Route::group(['middleware' => 'auth:user'], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
 //attendace用ルート
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function() {
     Route::get('attendance/index', 'User\AttendanceController@index');
     Route::get('attendance/create', 'User\AttendanceController@add');
     Route::post('attendance/create', 'User\AttendanceController@create');
@@ -25,18 +33,12 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
 });
 
 //出退勤
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function() {
     Route::get('attendance/attendance_start', 'User\HistoryController@attendance_start')->name('history/attendance_start');
     Route::get('attendance/attendance_end', 'User\HistoryController@attendance_end')->name('history/attendance_end');
 });
 
 
-Auth::routes();
-
-//user認証後
-Route::group(['middleware' => 'auth:user'], function() {
-    Route::get('/home', 'HomeController@index')->name('home');
-});
 
 //admin認証不要
 Route::group(['prefix' => 'admin'], function() {
