@@ -20,7 +20,7 @@
                            @endforeach
                        </ul>
                     </div>
-                    <div class="row">
+                <div class="row">
                     <div class="col-md-4">
                     <a href="{{ action('User\AttendanceController@add') }}"
                     role="button" class="btn btn-primary">勤務記録作成</a>
@@ -31,18 +31,18 @@
                       </div>
                     </div>
                     <div class="col-md-4 mx-auto">
-                          <div id="calender_container" class="four wide column center aligned">
-                              <input type="date">年月日を表示する</input>
-                           </div>
+                        <div id="calender_container" class="four wide column center aligned">
+                            <input type="date">年月日を表示する</input>
                         </div>
-                       <div class="col-md-8">
+                    </div>
+                    <div class="col-md-8">
                           {{ csrf_field() }}
-                          <a href="{{ action('User\HistoryController@attendance_start') }}"
-                          role="button" input type="submit" class="btn btn-primary">出勤</a>
-                          <a href="{{ action('User\HistoryController@attendance_end') }}"
-                          role="button" input type="submit" class="btn btn-primary">退勤</a>
-                        </div>
-                     </div>
+                        <a href="{{ action('User\HistoryController@attendance_start') }}"
+                        role="button" input type="submit" class="btn btn-primary">出勤</a>
+
+                        <a href="{{ action('User\HistoryController@attendance_end') }}"
+                        role="button" input type="submit" class="btn btn-primary">退勤</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="list-work_histories col-md-8 mx-auto">
@@ -63,7 +63,7 @@
                             @endforeach
                            </thead>
                 <div class="row">
-                    <div class="list-work_information col-md-12 mx-auto">
+                    <div class="list-work_management col-md-12 mx-auto">
                           <div class="row">
                           <table class="table table-light">
                             <thead>
@@ -85,10 +85,14 @@
                                 </tbody>
                            </thead>
                         </table>
-                    </div>  
-                </div>
+                      </div>  
+                    </div>
+                  </div>
+               </div>
             </div>
+          </div>
         </div>
+    </div>
 @endsection
 
 

@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
-//attendace用ルート
+//attendance用ルート
 Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function() {
     Route::get('attendance/index', 'User\AttendanceController@index');
     Route::get('attendance/create', 'User\AttendanceController@add');
@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     Route::get('management/information','Admin\ManagementController@information');
     Route::get('management/delete', 'Admin\ManagementController@delete');
     Route::get('management/resister', 'Admin\ManagementController@add');
-    Route::post('management/resistr', 'Admin\ManagementController@resister');
+    Route::post('management/resister', 'Admin\ManagementController@resister');
     Route::get('management/record', 'Admin\ManagementController@record');
 });
 

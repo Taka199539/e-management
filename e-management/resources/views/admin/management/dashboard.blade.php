@@ -10,19 +10,26 @@
         </div>
         <ul class="box-list">
             <li>
-                <div><img src="https://cdn.icon-icons.com/icons2/7/PNG/128/addusergroup_1251.png"></div>
-                <h2><a href="{{ action('Admin\ManagementController@add') }}">ユーザー情報登録</a></h2>
-                <p>ユーザー情報の登録ができます。</p>
+                <div><img src="https://i.gyazo.com/f9e0a3373d541afc5de5a07e4dfc2ddf.png"></div>
+                <h2 class="feature"><a href="{{ action('Admin\ManagementController@add') }}">ユーザー情報登録</a></h2>
+                <p class="center">ユーザー情報の登録ができます。</p>
             </li>
             <li>
-               <div><img src="https://cdn.icon-icons.com/icons2/7/PNG/128/book_1426.png"></div>
-               <h2><a href="{{ action('Admin\ManagementController@information') }}">ユーザー情報一覧</a></h2>
-               <p>ユーザー情報の閲覧、削除ができます。</p>
+               <div><img src="https://i.gyazo.com/39fe6515b28b8a65aefc247b748f746e.png"></div>
+               <h2 class="feature"><a href="{{ action('Admin\ManagementController@information') }}">ユーザー情報一覧</a></h2>
+               <p class="center">ユーザー情報の閲覧、削除ができます。</p>
             </li>
             <li>
-               <div><img src="https://cdn.icon-icons.com/icons2/7/PNG/128/list_notes_930.png"></div>
-               <h2><a href="{{ action('Admin\ManagementController@record') }}">勤務記録一覧</a></h2>
-               <p>ユーザーの勤務記録一覧です。</p>
+               <div><img src="https://i.gyazo.com/07a3eb23a84d775fca4c4419c5aa328c.png"></div>
+               <h2 class="feature"><a href="{{ action('Admin\ManagementController@record') }}">勤務記録一覧</a></h2>
+               <p class="center">ユーザーの勤務記録一覧が閲覧できます。</p>
+            </li>
+             <li>
+                <div><img src="https://i.gyazo.com/f9e0a3373d541afc5de5a07e4dfc2ddf.png"></div>
+                <h2 class="feature"><a href="{{ route('register') }}">ユーザー新規登録</a></h2>
+                <p class="center">ユーザー情報の登録ができます。</p>
             </li>
         </ul>
 @endsection
+
+

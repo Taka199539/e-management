@@ -25,9 +25,9 @@ class History extends Model
      * User関連付け
      * 1対1
      */
-     public function user()
+      public function user()
      {
-         $this->belongsTo('App\User');
-     }
+         $this->belongsTo(User::class);
+     } 
     
 }

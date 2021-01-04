@@ -50,7 +50,7 @@ class User extends Authenticatable
      * History関連付け
      * 1対多
      */
-    public function history()
+    public function histories()
     {
         return $this->hasMany('App\History');
     }

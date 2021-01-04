@@ -8,10 +8,13 @@
         <!-- CSRF Token -->
         <meta name="csrf_token" content="{{ csrf_token() }}">
         
-        <title>@yield('title')</title>
+        <title>E-Management</title>
         
         <!-- Scripts -->
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
        
         
         <!-- Fonts -->
@@ -26,10 +29,10 @@
     <body>
         
        <div id="app">
-            <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
+            <nav class="navbar navbar-expand-md navbar-dark navbar-e-management">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}"> 
-                    {{ config('app.name','laravel')}} 
+                    {{ config('app.name','e-management')}} 
                     </a>
                     <button class="navbar-toggler" type="button" 
                     data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -80,6 +83,14 @@
                     </div>
                 </div>
             </nav>
+            
+            <!-- フラッシュメッセージがある場合のみ表示 -->
+            @if (session('flash_message'))
+            <div class="flash_message bg-success text-center py-3 my-0">
+                {{ session('flash_message') }}
+            </div>
+            @endif
+
             
             <main class="py-4">
                 

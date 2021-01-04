@@ -67,6 +67,7 @@ class ManagementController extends Controller
     //ユーザー勤務記録
     public function record(Request $request)
     {
+        
         $attendances = Attendance::all();
         
         $histories = History::all();

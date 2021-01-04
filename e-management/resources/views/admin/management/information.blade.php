@@ -12,7 +12,7 @@
                     <table class="table table-dark">
                         <thead>
                            <tr>
-                           <th>ユーザーID {{ Auth::id() }}</th>
+                           <th>ユーザーID</th>
                            <th>名前</th>
                            <th>開始時間</th>
                            <th>終了時間</th>
