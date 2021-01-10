@@ -7,19 +7,24 @@
         <title>E-Management</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>">
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #00ffff;
-                color: #000;
-                font-family: 'Nunito', sans-serif;
+                background-color: #000;
+                color: #0b8;
+                font-family: 'Oswald', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+                background-image: url(https://i.gyazo.com/b5842a934bd95625db004747ec0a779c.jpg);
+                background-position: center center;
+                background-attachment: fixed;
+                background-size: cover;
+                opacity: 1;
             }
-
+            
             .full-height {
                 height: 100vh;
             }
@@ -49,9 +54,9 @@
             }
 
             .links > a {
-                color: #000;
+                color: #0b8;
                 padding: 0 25px;
-                font-size: 20px;
+                font-size: 30px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
@@ -64,16 +69,18 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div>
+            <div class="flex-center position-ref full-height">
 
-            <div class="content">
-                <div class="title m-b-md">
-                    E-Management
-                </div>
-
-                <div class="links">
-                    <a href="{{ action('User\AttendanceController@index') }}">ユーザーとしてログイン</a>
-                    <a href="{{ action('Admin\ManagementController@dashboard') }}">管理者としてログイン</a>
+                <div class="content">
+                    <div class="title m-b-md">
+                        E-Management
+                    </div>
+    
+                    <div class="links">
+                        <a href="{{ action('User\AttendanceController@index') }}">ユーザーとしてログイン</a>
+                        <a href="{{ action('Admin\ManagementController@dashboard') }}">管理者としてログイン</a>
+                    </div>
                 </div>
             </div>
         </div>

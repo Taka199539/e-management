@@ -67,7 +67,6 @@
                           <div class="row">
                           <table class="table table-light">
                             <thead>
-                                 <th>編集</th>
                                  <th>日付</th>
                                  <th>休憩</th>
                                  <th>時間外</th>
@@ -75,11 +74,11 @@
                             <tbody>
                             @foreach($attendances as $attendance)
                             <tr>
-                            <td><a href="{{ action('User\AttendanceController@edit', ['id' => $attendance->id])}}">編集</a></td>
                             <td>{{ $attendance->date }}</td>
                             <td>{{ $attendance->break_time }}</td>
                             <td>{{ $attendance->out_time }}</td>
                             <td>{{ $attendance->diary }}</td>
+                            <td><a href="{{ action('User\AttendanceController@edit', ['id' => $attendance->id])}}">編集</a></td>
                             </tr>
                             @endforeach
                                 </tbody>
@@ -94,6 +93,7 @@
         </div>
     </div>
 @endsection
+
 
 
 

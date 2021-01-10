@@ -4,7 +4,7 @@
 @section('content')
         <div class="container">
             <div class="row">
-             <h2>勤務記録一覧</h2>
+             <h2>管理画面</h2>
             </div>
              <p>管理者が使用できる機能の一覧です。</p>
         </div>
@@ -25,9 +25,9 @@
                <p class="center">ユーザーの勤務記録一覧が閲覧できます。</p>
             </li>
              <li>
-                <div><img src="https://i.gyazo.com/f9e0a3373d541afc5de5a07e4dfc2ddf.png"></div>
+                <div><img src="https://i.gyazo.com/beea41ad9d25a4cc9410c7fff225f88f.png"></div>
                 <h2 class="feature"><a href="{{ route('register') }}">ユーザー新規登録</a></h2>
-                <p class="center">ユーザー情報の登録ができます。</p>
+                <p class="center">ユーザーの新規登録ができます。</p>
             </li>
         </ul>
 @endsection
