@@ -74,6 +74,54 @@ class ManagementController extends Controller
         
         return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories]);
     }
+    
+    //CSV出力
+    public function csv()
+    {
+    
+        
+        $histories = History::all();
+        $attendances = Attendance::all();
 
+        $csvExporter = new \Laracsv\Export();
+
+        $csvExporter->beforeEach(function ($history) {
+            $history->created_at = $history->created_at->format('Y-m-d');
+        });
+        
+        $csvExporter->beforeEach(function ($attendance) {
+            $attendance->created_at = $attendance->created_at->format('Y-m-d');
+        });
+        
+        
+        //historiesテーブル
+        $csvExporter->build($histories, [
+            'user_id'=>'ユーザーID',
+            'attendance_start'=>'出勤',
+            'attendance_end' => '退勤'
+        ]);
+        
+        //attendanceテーブル
+        $csvExporter->build($attendances, [
+            'user_id'=>'ユーザーID',
+            'date'=>'日付',
+            'break_time'=>'休憩',
+            'out_time'=>'時間外',
+            'diary'=>'日報'
+        ]);
+
+        //CSV読み込み
+        $csvReader = $csvExporter->getReader();
+
+        $csvReader->setOutputBOM(\League\Csv\Reader::BOM_UTF8);
+
+        $filename = 'sample.csv';
+
+        return response((string) $csvReader)
+            ->header('Content-Type', 'text/csv; charset=UTF-8')
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"');
+     
+        return view('admin.management.record');
+    }
 }
 

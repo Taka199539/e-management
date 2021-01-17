@@ -18,7 +18,6 @@
                            <th>終了時間</th>
                            <th>休憩時間</th>
                            <th>勤務形態</th>
-                           <th>削除</th>
                            </tr>
                 {{ csrf_field() }}
                 <tbody>

@@ -25,11 +25,6 @@
                     <a href="{{ action('User\AttendanceController@add') }}"
                     role="button" class="btn btn-primary">勤務記録作成</a>
                     </div>
-                    <div clss="col-md-12 mx-auto">
-                      <div class="two wide column center aligned user_csv_container">
-                            <button type="submit" id="user_csv_export">CSVで出力する</button>
-                      </div>
-                    </div>
                     <div class="col-md-4 mx-auto">
                         <div id="calender_container" class="four wide column center aligned">
                             <input type="date">年月日を表示する</input>
@@ -44,8 +39,7 @@
                         role="button" input type="submit" class="btn btn-primary">退勤</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="list-work_histories col-md-8 mx-auto">
+                <div class="list-work_histories col-md-12 mx-auto">
                           <div class="row">
                           <table class="table table-light">
                             <thead>
@@ -91,7 +85,6 @@
             </div>
           </div>
         </div>
-    </div>
 @endsection
 
 

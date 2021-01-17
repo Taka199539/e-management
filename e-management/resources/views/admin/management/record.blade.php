@@ -4,10 +4,15 @@
 @section('content')
         <div class="container">
             <div class="row">
-               <h1>勤務記録一覧</h1>
+               <h2>勤務記録一覧</h2>
             </div>
-              <div class="row">
-                    <div class="list-work_histories col-md-8 mx-auto">
+            <div class="row">
+                <div class="col-md-6">
+                 <a href="{{ action('Admin\ManagementController@csv') }}"role="button" class="btn btn-primary">CSVで出力</a>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="list-work_histories col-md-12 mx-auto">
                           <div class="row">
                           <table class="table table-dark">
                             <thead>
@@ -26,7 +31,7 @@
                             </tr>
                             @endforeach
                 <div class="row">
-                    <div class="list-work_information col-md-12 mx-auto">
+                    <div class="list-work_attendances col-md-12 mx-auto">
                           <div class="row">
                           <table class="table table-dark">
                             <thead>
@@ -48,9 +53,12 @@
                                 </tbody>
                            </thead>
                         </table>
-                    </div>  
+                      </div>  
+                    </div>
                 </div>
-            </div>
+              </div>
+          </div>
         </div>
+     </div>
 @endsection
 

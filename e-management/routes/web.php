@@ -62,6 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     Route::get('management/resister', 'Admin\ManagementController@add');
     Route::post('management/resister', 'Admin\ManagementController@resister');
     Route::get('management/record', 'Admin\ManagementController@record');
+    Route::get('management/csv', 'Admin\ManagementController@csv');
 });
 
 
