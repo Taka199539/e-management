@@ -23,7 +23,6 @@ class HistoryController extends Controller
         $history->user_id = Auth::id();
         $history->attendance_start = Carbon::now();
          
-        $history->save();
         
         //打刻は1日1回まで
         $oldHistory = History::where('user_id', $attendance->id)->latest()->first();
@@ -34,6 +33,13 @@ class HistoryController extends Controller
         }
         
         $newHistoryDay = Carbon::today();
+        
+        $history->save();
+        
+        if(($oldHistoryDay == $newHistoryDay) && (empty($oldHistory->attendance_end))){
+            return redirect()->back->with('error');
+        }
+        
         
         
         return redirect('user/attendance/index')->with('flash_message', 'おはようございます！');
@@ -46,15 +52,17 @@ class HistoryController extends Controller
         
         $attendance->id = Auth::id();
         
-        $history = History::where('user_id', Auth::id());
+        $history = History::where('user_id', Auth::id())->orderBy('attendance_start', 'desc')->first(); 
         
         //打刻がされていない場合の処理
-        if( !empty($history->attendance_start)) {
+        if( empty($history->attendance_start)) {
             return redirect()->back()->with('error', '出勤の打刻がされていません。');
         }
         
-        $history->update([
+        
+        History::where('id', $history->id)->update([
             'attendance_end' => Carbon::now()]);
+        
         
         return redirect('user/attendance/index')->with('flash_message', 'お疲れ様でした！');
         
