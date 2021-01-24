@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-4 mx-auto">
                         <div id="calender_container" class="four wide column center aligned">
-                            <input type="date">年月日を表示する</input>
+                            <input type="date" value="<?php echo date('Y-m-d');?>">本日の日付</input>
                         </div>
                     </div>
                     <div class="col-md-8">

@@ -8,6 +8,7 @@ use App\Attendance;
 use App\History;
 use App\Profile;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class ManagementController extends Controller
 {
@@ -70,9 +71,11 @@ class ManagementController extends Controller
         
         $attendances = Attendance::all();
         
+        $users = User::All();
+        
         $histories = History::all();
         
-        return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories]);
+        return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories, 'users' => $users]);
     }
     
     //CSV出力
@@ -80,30 +83,34 @@ class ManagementController extends Controller
     {
     
         
-        $histories = History::all();
-        $attendances = Attendance::all();
+        $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->get();
+        
+        $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->get();
 
         $csvExporter = new \Laracsv\Export();
 
         $csvExporter->beforeEach(function ($history) {
-            $history->created_at = $history->created_at->format('Y-m-d');
         });
         
         $csvExporter->beforeEach(function ($attendance) {
-            $attendance->created_at = $attendance->created_at->format('Y-m-d');
+            
         });
         
         
         //historiesテーブル
         $csvExporter->build($histories, [
-            'user_id'=>'ユーザーID',
+            'name'=>'ユーザー名',
             'attendance_start'=>'出勤',
             'attendance_end' => '退勤'
         ]);
         
         //attendanceテーブル
         $csvExporter->build($attendances, [
-            'user_id'=>'ユーザーID',
+            'name'=>'ユーザー名',
             'date'=>'日付',
             'break_time'=>'休憩',
             'out_time'=>'時間外',
