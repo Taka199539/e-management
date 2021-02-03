@@ -12,7 +12,7 @@
                     <table class="table table-dark">
                         <thead>
                            <tr>
-                           <th>ユーザーID</th>
+                           <th>ID</th>
                            <th>名前</th>
                            <th>開始時間</th>
                            <th>終了時間</th>
@@ -25,7 +25,7 @@
                         <tr>
                             <td>{{ $profile->id }}</td>
                             <td>{{ $profile->name }}</td>
-                            @if($profile->profile) 
+                            @if($profile->start_time)
                             <td>{{ $profile->start_time }}</td>
                             <td>{{ $profile->end_time }}</td>
                             <td>{{ $profile->break_time }}</td>

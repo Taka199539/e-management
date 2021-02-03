@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Attendance;
 use App\History;
 use App\Profile;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
@@ -41,13 +43,15 @@ class AttendanceController extends Controller
      //勤務表の表示
     public function index(Request $request)
     {
-        $profiles = Profile::all();
         
-        $attendances = Attendance::all();
+            
+        $profile = Profile::find($request->id);
+
+        $attendances = Attendance::where('user_id', $request->user()->id)->get();
+       
+        $histories = History::where('user_id', $request->user()->id)->get();
         
-        $histories = History::all();
-        
-        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories, 'profiles' => $profiles]);
+        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories, 'profile' => $profile]);
     }
     
     //ユーザーの勤務情報編集

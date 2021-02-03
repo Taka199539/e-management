@@ -33,4 +33,12 @@ class CreateAttendancesTable extends Migration
     {
         Schema::dropIfExists('attendances');
     }
+    
+    public static function getAttendance($from, $until)
+    {
+        //created_atが20xx/xx/xx ~ 20xx/xx/xxのデータを取得
+        $attendance = Attendance::whereBetween("created_at", [$from, $until])->get();
+
+        return $attendance;
+    }
 }

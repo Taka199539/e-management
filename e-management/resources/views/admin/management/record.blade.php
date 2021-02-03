@@ -13,7 +13,7 @@
                 </div>
                <div class='col-md-8'>
                    <div class="form-group row">
-                <form action="hashtag" method="GET">
+                <form action={{ action('Admin\ManagementController@record')}} method="GET">
                 <input type="date" name="from" placeholder="from_date">
                 <span class="mx-3 text-grey">~</span>
                 <input type="date" name="until" placeholder="until_date">
@@ -39,7 +39,7 @@
                                 </tbody>
                             @foreach($histories as $history)
                             <tr>
-                                <td>{{ $users->where('id', $history->user_id)->first()->name }}</td>
+                                <td>{{ $history->name }}</td>
                                 <td>{{ $history->attendance_start }}</td>
                                 <td>{{ $history->attendance_end }}</td>
                             </tr>
@@ -57,7 +57,7 @@
                             <tbody>
                             @foreach($attendances as $attendance)
                             <tr>
-                            <td>{{ $users->where('id', $attendance->user_id)->first()->name }}"</td>
+                            <td>{{ $attendance->name }}"</td>
                             <td>{{ $attendance->date }}</td>
                             <td>{{ $attendance->break_time }}</td>
                             <td>{{ $attendance->out_time }}</td>

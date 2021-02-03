@@ -31,8 +31,7 @@ class ManagementController extends Controller
         $profile = new Profile;
         
         $form = $request->all();
-        
-        $profile->user_id = $request->user()->id;
+    
         
         
         //入力情報を保存
@@ -46,7 +45,9 @@ class ManagementController extends Controller
     public function information(Request $request)
     {
         
-        $profiles = User::All();
+        $profiles = DB::table('profiles')
+            ->leftJoin('users', 'profiles.user_id', '=', 'users.id')
+            ->get();
         
         return view('admin.management.information', ['profiles' => $profiles]);
     }
@@ -54,12 +55,15 @@ class ManagementController extends Controller
     //ユーザー情報の削除
     public function delete(Request $request)
     {
+        $profiles = DB::table('profiles')
+            ->leftJoin('users', 'profiles.user_id', '=', 'users.id')
+            ->get();
+            
         //該当するProfileモデルを検索
-        $user = User::find($request->id);
-        $profile = Profile::find($request->id);
+        $profiles = profile::find($request->id);
         //削除
-        $user->delete();
-        $profile->delete();
+     
+        $profiles->delete();
         
         return redirect('admin/management/dashboard');
     }
@@ -69,13 +73,27 @@ class ManagementController extends Controller
     public function record(Request $request)
     {
         
-        $attendances = Attendance::all();
+        $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->get();
         
-        $users = User::All();
         
-        $histories = History::all();
+        $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->get();
+            
+            if (!empty($request['from']) && !empty($request['until'])) {
+            //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
+            $attendance = Attendance::getAttendance($request['from'], $request['until']);
+        } else {
+            //リクエストデータがなければそのままで表示
+            $attendance = Attendance::get();
+        }
         
-        return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories, 'users' => $users]);
+    
+
+        
+        return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories]);
     }
     
     //CSV出力

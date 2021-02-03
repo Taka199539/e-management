@@ -11,10 +11,9 @@ class Profile extends Model
     
     public static $rules = array(
             'user_id' => 'required',
-            'name'=> 'required',
             'start_time'=> 'required',
             'end_time' => 'required',
             'break_time'=> 'required',
-            'status' => 'status'
+            'status' => 'required'
         );
 }

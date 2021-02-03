@@ -9,10 +9,10 @@
                  <form action="{{ action('Admin\ManagementController@resister') }}"
                  method="post" enctype="multipart/form-data">
                 <div class="form-group row">
-                        <label class="col-md-2" for="name">名前</label>
+                        <label class="col-md-2" for="user_id">ユーザーID</label>
                         <div class="col-md-10">
                              <input type="text" class="form"
-                             name="name" id="name">
+                             name="user_id" id="user_id">
                             </div>
                         </div>
                         

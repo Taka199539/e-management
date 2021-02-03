@@ -27,18 +27,11 @@ class HistoryController extends Controller
         //打刻は1日1回まで
         $oldHistory = History::where('user_id', $attendance->id)->latest()->first();
         
-        if ($oldHistory) {
-            $oldHistoryAttendance_Start = new Carbon($oldHistory->attendance_start);
-            $oldHistoryDay = $oldHistoryAttendance_Start->startOfDay();
-        }
         
         $newHistoryDay = Carbon::today();
         
         $history->save();
         
-        if(($oldHistoryDay == $newHistoryDay) && (empty($oldHistory->attendance_end))){
-            return redirect()->back->with('error');
-        }
         
         
         
