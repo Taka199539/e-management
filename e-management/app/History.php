@@ -28,6 +28,17 @@ class History extends Model
       public function user()
      {
          $this->belongsTo(User::class);
-     } 
+     }
+     
+     public static function getHistory($from, $until)
+     {
+         
+         $until = $until.' 23:59:59';
+         
+         $histories = History::WhereBetween('created_at', [$from, $until])->get();
+         
+         
+         return $histories;
+     }
     
 }

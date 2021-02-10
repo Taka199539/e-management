@@ -8,14 +8,13 @@
             </div>
                <div class="row">
                      <div class="col-md-4 mx-auto">
+                       <h3>従業員ステータス</h3>
                        <ul class="list-item">
                            @if(!empty($profile))
-                           <li>{{ $profile->user_id }} </li>
-                           <li>{{ $profile->name }}</li>
-                           <li>{{ $profile->start_time }}</li>
-                           <li>{{ $profile->end_time}} </li>
-                           <li>{{ $profile->break_time}} </li>
-                           <li>{{ $profile->status }} </li>
+                           <li>開始時間 : {{ $profile->start_time }}</li>
+                           <li>終了時間 : {{ $profile->end_time}} </li>
+                           <li>休憩時間 : {{ $profile->break_time}} </li>
+                           <li>勤務形態 : {{ $profile->status }} </li>
                            @endif
                        </ul>
                     </div>
@@ -26,7 +25,7 @@
                     </div>
                     <div class="col-md-4 mx-auto">
                         <div id="calender_container" class="four wide column center aligned">
-                            <input type="date" value="<?php echo date('Y-m-d');?>">本日の日付</input>
+                            <input type="date" value="<?php echo date('Y-m-d');?>">を表示</input>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -39,7 +38,7 @@
                     </div>
                 </div>
                 <div class="list-work_histories col-md-12 mx-auto">
-                          <div class="row">
+                        <div class="row">
                           <table class="table table-light">
                             <thead>
                                 <tbody>
@@ -55,13 +54,13 @@
                             </tr>
                             @endforeach
                            </thead>
+                          {{ $histories->links() }}
+                      </div>
                 <div class="row">
                     <div class="list-work_management col-md-12 mx-auto">
                           <div class="row">
                           <table class="table table-light">
                             <thead>
-                                 <th>ID</th>
-                                 <th>ユーザーID</th>
                                  <th>日付</th>
                                  <th>休憩</th>
                                  <th>時間外</th>
@@ -69,8 +68,6 @@
                             <tbody>
                             @foreach($attendances as $attendance)
                             <tr>
-                            <td>{{ $attendance->id }}</td>
-                            <td>{{ $attendance->user_id }}</td>
                             <td>{{ $attendance->date }}</td>
                             <td>{{ $attendance->break_time }}</td>
                             <td>{{ $attendance->out_time }}</td>
@@ -84,10 +81,9 @@
                       </div>  
                     </div>
                   </div>
+                  {{ $attendances->links() }}
                </div>
-            </div>
           </div>
-        </div>
 @endsection
 
 

@@ -34,4 +34,14 @@ class Attendance extends Model
      {
          $this->belongsTo('App\User');
      }
+     
+     public static function getAttendance($from, $until)
+     {
+         $until = $until.' 23:59:59';
+         
+         $attendances = Attendance::WhereBetween('created_at', [$from, $until])->get();
+         
+         
+         return $attendances;
+     }
 }

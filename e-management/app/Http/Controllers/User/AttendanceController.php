@@ -45,11 +45,12 @@ class AttendanceController extends Controller
     {
         
             
-        $profile = Profile::find($request->id);
-
-        $attendances = Attendance::where('user_id', $request->user()->id)->get();
+        $profile = Profile::where('user_id', $request->user()->id)->first();
+        
+        $attendances = Attendance::where('user_id', $request->user()->id)->paginate(31);
        
-        $histories = History::where('user_id', $request->user()->id)->get();
+        $histories = History::where('user_id', $request->user()->id)->paginate(31);
+    
         
         return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories, 'profile' => $profile]);
     }

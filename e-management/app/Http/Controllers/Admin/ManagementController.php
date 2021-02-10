@@ -81,33 +81,64 @@ class ManagementController extends Controller
         $histories = DB::table('histories')
             ->leftJoin('users', 'histories.user_id', '=', 'users.id')
             ->get();
+        
+        
             
-            if (!empty($request['from']) && !empty($request['until'])) {
+        if (!empty($request['from']) && !empty($request['until'])) {
             //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
-            $attendance = Attendance::getAttendance($request['from'], $request['until']);
-        } else {
+          //  $attendances = Attendance::getAttendance($request['from'], $request['until']);
+          $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+          $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereBetween('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+        } elseif  (!empty($request['from']) && empty($request['until'])) {
+            $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereDate('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+            $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereDate('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+        } elseif (empty($request['from']) && !empty($request['until'])) {
+            $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereDate('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+            $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereDate('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+        
             //リクエストデータがなければそのままで表示
-            $attendance = Attendance::get();
+            $attendances = Attendance::get();
+            $histories = History::get();
         }
         
-    
-
         
         return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories]);
     }
     
     //CSV出力
-    public function csv()
+    public function csv(Request $request)
     {
     
         
         $histories = DB::table('histories')
             ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
             ->get();
         
         $attendances = DB::table('attendances')
             ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
             ->get();
+            
+        
 
         $csvExporter = new \Laracsv\Export();
 
