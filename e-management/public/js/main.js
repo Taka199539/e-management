@@ -2,10 +2,10 @@
 
 (function() {
     'use strict';
-    
-    //フラッシュメッセージをフェードアウト
+
+    // フラッシュメッセージのfadeout
     (function(){
         ('.flash_message').fadeOut(3000);
     });
-    
+
 })();

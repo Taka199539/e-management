@@ -130,12 +130,10 @@ class ManagementController extends Controller
         
         $histories = DB::table('histories')
             ->leftJoin('users', 'histories.user_id', '=', 'users.id')
-            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
             ->get();
         
         $attendances = DB::table('attendances')
             ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
-            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
             ->get();
             
         
