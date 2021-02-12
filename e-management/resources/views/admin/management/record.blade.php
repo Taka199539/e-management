@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-4">
                      <a href="{{ action('Admin\ManagementController@csv') }}"
-                     role="button" class="btn btn-primary">CSVで出力</a>
+                     role="button" class="btn btn-primary">CSVで出力する</a>
                 </div>
                 <div class='col-md-8'>
                      <div class="form-group row">
