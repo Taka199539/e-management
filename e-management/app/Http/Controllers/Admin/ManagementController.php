@@ -59,7 +59,7 @@ class ManagementController extends Controller
             ->leftJoin('users', 'profiles.user_id', '=', 'users.id')
             ->get();
             
-        //該当するProfileモデルを検索
+        //該当するProfileモデルを検索する
         $profiles = profile::find($request->id);
         //削除
      
