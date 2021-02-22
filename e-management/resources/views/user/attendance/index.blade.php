@@ -7,9 +7,10 @@
                <h2>勤務表</h2>
             </div>
                <div class="row">
-                     <div class="col-md-4 mx-auto">
+                    <div class="col-md-4 mx-auto">
+                      <section>
                        <h3>従業員ステータス</h3>
-                       <ul class="list-item">
+                       <ul class="profile_list">
                            @if(!empty($profile))
                            <li>開始時間 : {{ $profile->start_time }}</li>
                            <li>終了時間 : {{ $profile->end_time}} </li>
@@ -17,6 +18,7 @@
                            <li>勤務形態 : {{ $profile->status }} </li>
                            @endif
                        </ul>
+                       </section>
                     </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -54,8 +56,10 @@
                             </tr>
                             @endforeach
                            </thead>
-                          {{ $histories->links() }}
+                         </table>
                       </div>
+                      {{ $histories->links() }}
+                </div>
                 <div class="row">
                     <div class="list-work_management col-md-12 mx-auto">
                           <div class="row">
@@ -80,10 +84,9 @@
                         </table>
                       </div>  
                     </div>
-                  </div>
-                  {{ $attendances->links() }}
-               </div>
-          </div>
+                {{ $attendances->links() }}
+            </div>
+        </div>
 @endsection
 
 

@@ -1,10 +1,10 @@
 @extends('layouts.app_admin')
-@section('title', 'ユーザー情報')
+@section('title', 'ユーザー情報一覧')
 
 @section('content')
         <div class="container">
              <div class="row">
-                 <h2>ユーザー情報</h2>
+                 <h2>ユーザー情報一覧</h2>
              </div>
              <div class="row">
             <div class="list-user-information col-md-12 mx-auto">
@@ -19,7 +19,6 @@
                            <th>休憩時間</th>
                            <th>勤務形態</th>
                            </tr>
-                {{ csrf_field() }}
                 <tbody>
                     @foreach($profiles as $profile)
                         <tr>
@@ -36,7 +35,11 @@
                              <td></td>
                              <td></td>
                              @endif
-                            <td><a href="{{ action('Admin\ManagementController@delete', ['id' => $profile->id]) }}">削除</a></td>
+                            <td>
+                                <form action="/admin/management/delete/{{$profile->id}}" method='GET'>
+                                {{ csrf_field() }}
+                                <input type="submit" name="delete" value="削除" class='btn btn-primary btn-sm btn-dell'>
+                                </form>
                         </tr>
                     @endforeach
                     </tbody>
@@ -44,8 +47,24 @@
                 </table>
             </div>
         </div>
+        {{ $profiles->links() }}
     </div>
+    @section('script')
+  <script>
+  $(function(){
+  $(".btn-dell").click(function(){
+  if(confirm("本当に削除しますか？")){
+  }else{
+  //cancel
+  return false;
+  }
+  });
+  });
+  </script>
 @endsection
+@endsection
+
+
 
 
 

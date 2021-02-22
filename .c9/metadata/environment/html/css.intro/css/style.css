@@ -1,0 +1,89 @@
+#title {
+  color: red;
+}
+
+.description {
+  color: blue;
+}
+
+
+/*要素の高さと幅、余白を調整*/
+.box1 {
+    background-color: silver;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 300px;
+}
+
+.box2 {
+    background-color: red;
+    width: 300px;
+    height: 300px;
+}
+
+/*marginとpaddingの間、形状変更可*/
+button {
+    background-color: blue;
+    padding: 100px 300px;
+    border: 2px solid red;
+    border-radius: 30px;
+}
+
+
+
+button {
+    background-color: blue;
+    padding:　100px 300px;
+}
+
+/*要素の位置変更*/
+.box {
+    background-color: silver;
+    width: 300px;
+    height: 100px;
+    margin-bottom: 30px;
+    position: relative;
+    top: 30px;
+    left: 40px;
+}
+
+/*absolute ウインドウ、または親要素」を基準にし、そこからの距離の場所に配置
+.box {
+    background: 300px;
+    width: 300px;
+    height: 300px;
+}
+
+.box2 {
+    background-color: black;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 30px;
+    left: 40px;
+}
+*/
+
+/*フォントのサイズ、太さ、スタイル、変更*/
+p {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'arial';
+}
+
+/*float 右や左に寄せる*/
+.box1 {
+    background-color: silver;
+    width: 500px;
+    height: 300px;
+    float: left;
+}
+
+.box2 {
+    background-color: black;
+    width: 500px;
+    height: 300px;
+    float: right;
+}
+

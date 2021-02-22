@@ -10,6 +10,7 @@ use App\Profile;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
+
 class ManagementController extends Controller
 {
     
@@ -47,25 +48,24 @@ class ManagementController extends Controller
         
         $profiles = DB::table('profiles')
             ->leftJoin('users', 'profiles.user_id', '=', 'users.id')
-            ->get();
+            ->paginate(10);
         
         return view('admin.management.information', ['profiles' => $profiles]);
     }
     
     //ユーザー情報の削除
-    public function delete(Request $request)
+    public function delete(Request $request, $id)
     {
-        $profiles = DB::table('profiles')
-            ->leftJoin('users', 'profiles.user_id', '=', 'users.id')
-            ->get();
-            
+        \Log::info('1111');
+        \Log::info($id);
         //該当するProfileモデルを検索する
-        $profiles = profile::find($request->id);
-        //削除
-     
-        $profiles->delete();
+        Profile::where('user_id', $id)->delete();
+
         
-        return redirect('admin/management/dashboard');
+        //削除
+        // $profile->delete();
+        
+        return redirect('admin/management/information');
     }
 
     
@@ -86,12 +86,11 @@ class ManagementController extends Controller
             
         if (!empty($request['from']) && !empty($request['until'])) {
             //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
-          //  $attendances = Attendance::getAttendance($request['from'], $request['until']);
-          $attendances = DB::table('attendances')
+            $attendances = DB::table('attendances')
             ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
             ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
             ->get();
-          $histories = DB::table('histories')
+            $histories = DB::table('histories')
             ->leftJoin('users', 'histories.user_id', '=', 'users.id')
             ->WhereBetween('histories.created_at', [$request['from'], $request['until']])
             ->get();
@@ -135,15 +134,47 @@ class ManagementController extends Controller
         $attendances = DB::table('attendances')
             ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
             ->get();
+        
+        
+            if (!empty($request['from']) && !empty($request['until'])) {
+            //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
+            $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereBetween('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+            $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+        } elseif  (!empty($request['from']) && empty($request['until'])) {
+            $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereDate('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+            $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereDate('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+        } elseif (empty($request['from']) && !empty($request['until'])) {
+            $histories = DB::table('histories')
+            ->leftJoin('users', 'histories.user_id', '=', 'users.id')
+            ->WhereDate('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+            $attendances = DB::table('attendances')
+            ->leftJoin('users', 'attendances.user_id', '=', 'users.id')
+            ->WhereDate('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
             
+        }
+        
         
 
         $csvExporter = new \Laracsv\Export();
 
-        $csvExporter->beforeEach(function ($history) {
+        $csvExporter->beforeEach(function ($histories) {
         });
         
-        $csvExporter->beforeEach(function ($attendance) {
+        $csvExporter->beforeEach(function ($attendances) {
             
         });
         
@@ -175,7 +206,7 @@ class ManagementController extends Controller
             ->header('Content-Type', 'text/csv; charset=UTF-8')
             ->header('Content-Disposition', 'attachment; filename="'.$filename.'"');
      
-        return view('admin.management.record');
+        return view('admin.management.record', ['histories' => $histories, 'attendances' => $attendances]);
     }
 }
 

@@ -1,11 +1,12 @@
-
-
+/* global $*/
 (function() {
     'use strict';
 
-    // フラッシュメッセージのfadeout
-    (function(){
+    // フラッシュメッセージをfadeout
+    $(function(){
         ('.flash_message').fadeOut(3000);
     });
 
 })();
+
+

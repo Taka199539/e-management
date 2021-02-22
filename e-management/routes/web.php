@@ -58,9 +58,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     Route::get('management/dashboard', 'Admin\ManagementController@dashboard');
     Route::get('management/information','Admin\ManagementController@information');
-    Route::get('management/delete', 'Admin\ManagementController@delete');
+    Route::get('management/delete/{id}', 'Admin\ManagementController@delete');
     Route::get('management/resister', 'Admin\ManagementController@add');
     Route::post('management/resister', 'Admin\ManagementController@resister');
     Route::get('management/record', 'Admin\ManagementController@record');
     Route::get('management/csv', 'Admin\ManagementController@csv');
 });
+
