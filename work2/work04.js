@@ -2,7 +2,7 @@
 
 (function($, window) {
 
-    function emailCheck(email) {
+    function emailCheck() {
         var email = $('#email').val();
         if (email == '') {
             alert('メールアドレスを入力してください');
@@ -11,7 +11,7 @@
         }
     }
 
-    function passwordCheck(password) {
+    function passwordCheck(){
         var password = $('#password').val();
         if (password == '') {
             alert(' パスワードを入力してください');
@@ -20,9 +20,9 @@
         }
     }
 
-    $('#login').on('click', function() {
-        emailCheck('email');
-        passwordCheck('password');
+    $('#login').on('click', function(e) {
+        emailCheck();
+        passwordCheck();
     });
 
 })(jQuery, window);
