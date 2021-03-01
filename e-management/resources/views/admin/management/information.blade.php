@@ -52,17 +52,19 @@
     @section('script')
   <script>
   $(function(){
-  $(".btn-dell").click(function(){
-  if(confirm("本当に削除しますか？")){
-  }else{
-  //cancel
-  return false;
-  }
-  });
+    $(".btn-dell").click(function(){
+      if(confirm("本当に削除しますか？")){
+        $('this').submit();
+      }else{
+        return false;
+      }
+    });
   });
   </script>
 @endsection
 @endsection
+
+
 
 
 

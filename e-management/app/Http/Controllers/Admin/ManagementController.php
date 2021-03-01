@@ -118,11 +118,14 @@ class ManagementController extends Controller
             $histories = History::get();
         }
         
+       
         
-        return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories]);
+        
+        return view('admin.management.record', ['attendances' => $attendances, 'histories' => $histories, 'from_date' => $request->from, 'until_date' => $request->until]);
     }
     
     //CSV出力
+    
     public function csv(Request $request)
     {
     
@@ -179,12 +182,15 @@ class ManagementController extends Controller
         });
         
         
+    
         //historiesテーブル
         $csvExporter->build($histories, [
             'name'=>'ユーザー名',
             'attendance_start'=>'出勤',
             'attendance_end' => '退勤'
         ]);
+        
+       
         
         //attendanceテーブル
         $csvExporter->build($attendances, [
@@ -194,6 +200,8 @@ class ManagementController extends Controller
             'out_time'=>'時間外',
             'diary'=>'日報'
         ]);
+        
+    
 
         //CSV読み込み
         $csvReader = $csvExporter->getReader();

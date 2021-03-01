@@ -8,17 +8,21 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                     <a href="{{ action('Admin\ManagementController@csv') }}"
-                     role="button" class="btn btn-primary">CSVで出力する</a>
+                     <form action={{ action('Admin\ManagementController@csv')}} method="GET">
+                     <input type="hidden" name="from" value="{{ $from_date }}" placeholder="from_date">
+                     <input type="hidden" name="until" value="{{ $until_date }}"  placeholder="until_date">
+                     {{ csrf_field() }}
+                    <input type="submit" class="btn btn-primary"  value="CSVで出力"> 
+                    </form>
                 </div>
                 <div class='col-md-8'>
                      <div class="form-group row">
                      <form action={{ action('Admin\ManagementController@record')}} method="GET">
-                     <input type="date" name="from" placeholder="from_date">
+                     <input type="date" name="from"value="{{ $from_date }}"  placeholder="from_date">
                      <span class="mx-6 text-grey">~</span>
-                     <input type="date" name="until" placeholder="until_date">
+                     <input type="date" name="until" value="{{ $until_date }}" placeholder="until_date">
                      {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" value="検索">
+                    <input type="submit" class="btn btn-primary" name='record'value="検索">
                     </form>
                    </div>
                </div>
