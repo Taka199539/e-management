@@ -43,21 +43,53 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         
-            
         $profile = Profile::where('user_id', $request->user()->id)->first();
         
-        $attendances = Attendance::where('user_id', $request->user()->id)->paginate(31);
+        $attendances = Attendance::where('user_id', $request->user()->id)->get();
        
-        $histories = History::where('user_id', $request->user()->id)->paginate(31);
+        $histories = History::where('user_id', $request->user()->id)->get();
+        
+        if (!empty($request['from']) && !empty($request['until'])) {
+            //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
+            $attendances = DB::table('attendances')
+            ->where('user_id', $request->user()->id)
+            ->WhereBetween('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+            $histories = DB::table('histories')
+            ->WhereBetween('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+        } elseif  (!empty($request['from']) && empty($request['until'])) {
+            $attendances = DB::table('attendances')
+            ->where('user_id', $request->user()->id)
+            ->WhereDate('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+            $histories = DB::table('histories')
+            ->where('user_id', $request->user()->id)
+            ->WhereDate('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+        } elseif (empty($request['from']) && !empty($request['until'])) {
+            $attendances = DB::table('attendances')
+            ->where('user_id', $request->user()->id)
+            ->WhereDate('attendances.created_at', [$request['from'], $request['until']])
+            ->get();
+            $histories = DB::table('histories')
+            ->where('user_id', $request->user()->id)
+            ->WhereDate('histories.created_at', [$request['from'], $request['until']])
+            ->get();
+        
+            //リクエストデータがなければそのままで表示
+            $attendances = Attendance::get();
+            $histories = History::get();
+        }
     
         
-        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories, 'profile' => $profile]);
+        return view('user.attendance.index', ['attendances' => $attendances, 'histories' => $histories, 'profile' => $profile, 'from_date' => $request->from, 'until_date' => $request->until]);
     }
     
     //ユーザーの勤務情報編集
     public function edit(Request $request)
     {
-       
+        //ユーザーIDを検索
         $attendance = Attendance::find($request->id);
         
         
@@ -76,11 +108,6 @@ class AttendanceController extends Controller
         //データを上書きして保存
         $attendance->fill($attendance_form)->save();
         
-        return redirect('user/attendance/index');
-    }
-    
-    public function delete()
-    {
         return redirect('user/attendance/index');
     }
 }

@@ -20,14 +20,14 @@
                     <div class="form-group row">
                             <label class="col-md-2" for="date">日付</label>
                         <div class="col-md-10">
-                            <input type="date" name="date" id="date">
+                            <input type="date" name="date" id="date" value="<?php echo date('Y-m-d');?>">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                             <label class="col-md-2" for="break_time">休憩時間</label>
                         <div class="col-md-10">
-                            <input type="time" min="00:00" max="23:59" name="break_time" id="break_time">
+                            <input type="time" min="00:00" max="01:00" name="break_time" id="break_time">
                         </div>
                      </div>    
                      

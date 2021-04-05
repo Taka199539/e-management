@@ -25,40 +25,43 @@
                     <a href="{{ action('User\AttendanceController@add') }}"
                     role="button" class="btn btn-primary">勤務記録作成</a>
                     </div>
-                    <div class="col-md-4 mx-auto">
-                        <div id="calender_container" class="four wide column center aligned">
-                            <input type="date" value="<?php echo date('Y-m-d');?>">を表示</input>
-                        </div>
+                    <div class='col-md-8'>
+                     <div class="form-group row">
+                     <form action={{ action('User\AttendanceController@index')}} method="GET">
+                     <input type="date" name="from"value="{{ $from_date }}"  placeholder="from_date">
+                     <span class="mx-6 text-grey">~</span>
+                     <input type="date" name="until" value="{{ $until_date }}" placeholder="until_date">
+                     {{ csrf_field() }}
+                    <input type="submit" class="btn btn-primary" name='index'value="検索">
+                    </form>
+                     </div>
                     </div>
                     <div class="col-md-8">
                           {{ csrf_field() }}
-                        <a href="{{ action('User\HistoryController@attendance_start') }}"
-                        role="button" input type="submit" class="btn btn-primary">出勤</a>
+                        <input type="submit" id='get_attendance_start'  value='出勤' class="btn btn-primary">
 
-                        <a href="{{ action('User\HistoryController@attendance_end') }}"
-                        role="button" input type="submit" class="btn btn-primary">退勤</a>
+                        <input type="submit" id='get_attendance_end' value='退勤' class="btn btn-primary">
                     </div>
                 </div>
                 <div class="list-work_histories col-md-12 mx-auto">
                         <div class="row">
                           <table class="table table-light">
                             <thead>
-                                <tbody>
-                            <tr> 
+                               <tr> 
                                  <th width=10%>出勤</th>
                                  <th width=10%>退勤</th>
-                            </tr>
-                                </tbody>
+                               </tr>
+                            </thead>
+                            <tbody class="histories">
                             @foreach($histories as $history)
-                            <tr>
+                              <tr>
                                 <td>{{ $history->attendance_start }}</td>
                                 <td>{{ $history->attendance_end }}</td>
-                            </tr>
+                              </tr>
                             @endforeach
-                           </thead>
+                           </tbody>
                          </table>
-                      </div>
-                      {{ $histories->links() }}
+                     </div>
                 </div>
                 <div class="row">
                     <div class="list-work_management col-md-12 mx-auto">
@@ -79,15 +82,15 @@
                             <td><a href="{{ action('User\AttendanceController@edit', ['id' => $attendance->id])}}">編集</a></td>
                             </tr>
                             @endforeach
-                                </tbody>
+                            </tbody>
                            </thead>
                         </table>
                       </div>  
-                    </div>
-                {{ $attendances->links() }}
+                </div>
             </div>
         </div>
 @endsection
+
 
 
 

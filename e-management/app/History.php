@@ -10,7 +10,7 @@ class History extends Model
     
     protected $fillable = ['user_id' => 'required',
                            'attendance_start' => 'required',
-                           'attendance_end' => 'required'];
+                           'attendance_end' => 'nullable'];
 
     /**
      * attendance関連付け

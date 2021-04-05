@@ -13,7 +13,9 @@
         <!-- Scripts -->
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
         <script src="{{ secure_asset('js/main.js') }}" defer></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+     
         
        
         
@@ -84,24 +86,11 @@
                 </div>
             </nav>
             
-            <!-- フラッシュメッセージがある場合のみ表示 -->
+           
             
             
-            <!-- Scripts -->
             
-            <script type="text/javascript">
-            @if (session('msg_success'))
-                $(function(){
-                        ('{{ session('msg_success') }}');
-                });
-            @endif
-            </script>
-
-            @if (session('flash_message'))
-            <div class="flash_message bg-success text-center py-3 my-0">
-                {{ session('flash_message') }}
-            </div>
-            @endif
+            
     
             
             <main class="mt-4">

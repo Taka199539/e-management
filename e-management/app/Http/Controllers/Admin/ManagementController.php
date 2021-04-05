@@ -39,7 +39,7 @@ class ManagementController extends Controller
         $profile->fill($form);
         $profile->save();
         
-        return redirect('admin/management/dashboard');
+        return redirect('admin/management/resister');
     }
     
     //ユーザー情報一覧
@@ -56,14 +56,10 @@ class ManagementController extends Controller
     //ユーザー情報の削除
     public function delete(Request $request, $id)
     {
-        \Log::info('1111');
-        \Log::info($id);
-        //該当するProfileモデルを検索する
+        
+        //該当するProfileモデルを検索、削除する
         Profile::where('user_id', $id)->delete();
 
-        
-        //削除
-        // $profile->delete();
         
         return redirect('admin/management/information');
     }
