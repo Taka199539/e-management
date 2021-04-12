@@ -29,8 +29,8 @@
             </div>
                 <div class="row">
                     <div class="list-work_histories col-md-12 mx-auto">
-                          <div class="row">
-                          <table class="table table-dark">
+                        <div class="row">
+                        <table class="table table-dark">
                             <thead>
                                 <tbody>
                             <tr> 
@@ -48,8 +48,8 @@
                             @endforeach
                 <div class="row">
                     <div class="list-work_attendances col-md-12 mx-auto">
-                          <div class="row">
-                          <table class="table table-dark">
+                        <div class="row">
+                        <table class="table table-dark">
                             <thead>
                                  <th>ユーザー名</th>
                                  <th>日付</th>
@@ -67,15 +67,15 @@
                             </tr>
                             @endforeach
                                 </tbody>
-                           </thead>
+                            </thead>
                         </table>
                       </div>  
                     </div>
-                </div>
-              </div>
+                 </div>
+               </div>
             </div>
+          </div>
         </div>
-     </div>
 @endsection
 
 

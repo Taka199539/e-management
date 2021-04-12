@@ -6,7 +6,7 @@
             <div class="row">
                <h2>勤務表</h2>
             </div>
-               <div class="row">
+            <div class="row">
                     <div class="col-md-4 mx-auto">
                       <section>
                        <h3>従業員ステータス</h3>
@@ -65,8 +65,8 @@
                 </div>
                 <div class="row">
                     <div class="list-work_management col-md-12 mx-auto">
-                          <div class="row">
-                          <table class="table table-light">
+                        <div class="row">
+                        <table class="table table-light">
                             <thead>
                                  <th>日付</th>
                                  <th>休憩</th>
@@ -85,7 +85,8 @@
                             </tbody>
                            </thead>
                         </table>
-                      </div>  
+                        </div>  
+                    </div>
                 </div>
             </div>
         </div>

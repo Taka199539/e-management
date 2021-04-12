@@ -33,12 +33,12 @@ class History extends Model
      public static function getHistory($from, $until)
      {
          
-         $until = $until.' 23:59:59';
+        $until = $until.' 23:59:59';
          
-         $histories = History::WhereBetween('created_at', [$from, $until])->get();
+        $histories = History::WhereBetween('created_at', [$from, $until])->get();
          
          
-         return $histories;
+        return $histories;
      }
     
 }

@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        if (\App::envrionment('production')) {
+            \URL::forceScema('https');
+        }
     }
 }
